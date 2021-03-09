@@ -542,10 +542,10 @@ module.exports = class User extends Model {
         preheadertext: `A password reset was requested for ${WIKI.config.title}`,
         title: `A password reset was requested for ${WIKI.config.title}`,
         content: `Click the button below to reset your password. If you didn't request this password reset, simply discard this email.`,
-        buttonLink: `${WIKI.config.host}/login-reset/${resetToken}`,
+        buttonLink: `${WIKI.config.host}/${WIKI.config.prefix}/login-reset/${resetToken}`,
         buttonText: 'Reset Password'
       },
-      text: `A password reset was requested for wiki ${WIKI.config.title}. Open the following link to proceed: ${WIKI.config.host}/login-reset/${resetToken}`
+      text: `A password reset was requested for wiki ${WIKI.config.title}. Open the following link to proceed: ${WIKI.config.host}/${WIKI.config.prefix}/login-reset/${resetToken}`
     })
   }
 
@@ -656,10 +656,10 @@ module.exports = class User extends Model {
             preheadertext: `You've been invited to the wiki ${WIKI.config.title}`,
             title: `You've been invited to the wiki ${WIKI.config.title}`,
             content: `Click the button below to access the wiki.`,
-            buttonLink: `${WIKI.config.host}/login`,
+            buttonLink: `${WIKI.config.host}/${WIKI.config.prefix}/login`,
             buttonText: 'Login'
           },
-          text: `You've been invited to the wiki ${WIKI.config.title}: ${WIKI.config.host}/login`
+          text: `You've been invited to the wiki ${WIKI.config.title}: ${WIKI.config.host}/${WIKI.config.prefix}/login`
         })
       }
     } else {

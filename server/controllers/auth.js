@@ -38,7 +38,7 @@ router.get('/login', async (req, res, next) => {
       const stg = await WIKI.models.authentication.query().orderBy('order').first()
       const stgInfo = _.find(WIKI.data.authentication, ['key', stg.strategyKey])
       if (!stgInfo.useForm) {
-        return res.redirect(`/login/${stg.key}`)
+        return res.redirect(`/${WIKI.config.prefix}/login/${stg.key}`)
       }
     }
     // -> Show Login
@@ -92,7 +92,7 @@ router.post('/login', bruteforce.prevent, async (req, res, next) => {
       }, { req, res })
       req.brute.reset()
       res.cookie('jwt', authResult.jwt, { expires: moment().add(1, 'y').toDate() })
-      res.redirect('/')
+      res.redirect('/${WIKI.config.prefix}/')
     } catch (err) {
       const { formStrategies, socialStrategies } = await WIKI.models.authentication.getStrategiesForLegacyClient()
       res.render('legacy/login', {
@@ -102,7 +102,7 @@ router.post('/login', bruteforce.prevent, async (req, res, next) => {
       })
     }
   } else {
-    res.redirect('/login')
+    res.redirect('/${WIKI.config.prefix}/login')
   }
 })
 
@@ -138,11 +138,11 @@ router.get('/verify/:token', bruteforce.prevent, async (req, res, next) => {
     await WIKI.models.users.query().patch({ isVerified: true }).where('id', usr.id)
     req.brute.reset()
     if (WIKI.config.auth.enforce2FA) {
-      res.redirect('/login')
+      res.redirect('/${WIKI.config.prefix}/login')
     } else {
       const result = await WIKI.models.users.refreshToken(usr)
       res.cookie('jwt', result.token, { expires: moment().add(1, 'years').toDate() })
-      res.redirect('/')
+      res.redirect('/${WIKI.config.prefix}/')
     }
   } catch (err) {
     next(err)

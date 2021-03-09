@@ -81,6 +81,9 @@ module.exports = {
             } else if (href.charAt(3) !== '/') {
               href = `/${this.page.localeCode}${href}`
             }
+            // if (WIKI.config.prefix) {
+            //   href = "/" + WIKI.config.prefix + href
+            // }
 
             try {
               const parsedUrl = new URL(`http://x${href}`)
@@ -110,6 +113,11 @@ module.exports = {
             localeCode: pagePath.locale,
             path: pagePath.path
           })
+
+          // -> Add global app prefix
+          if (WIKI.config.prefix && href.indexOf('/') === 0) {
+            href = `/${WIKI.config.prefix}${href}`
+          }
 
           $(elm).addClass(`is-internal-link`)
         }

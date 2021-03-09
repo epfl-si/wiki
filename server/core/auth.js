@@ -81,7 +81,7 @@ module.exports = {
         try {
           const strategy = require(`../modules/authentication/${stg.strategyKey}/authentication.js`)
 
-          stg.config.callbackURL = `${WIKI.config.host}/login/${stg.key}/callback`
+          stg.config.callbackURL = `${WIKI.config.host}/${WIKI.config.prefix}/login/${stg.key}/callback`
           strategy.init(passport, stg.config)
           strategy.config = stg.config
 

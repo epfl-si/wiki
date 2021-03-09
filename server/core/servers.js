@@ -127,7 +127,7 @@ module.exports = {
         onConnect: (connectionParams, webSocket) => {
 
         },
-        path: '/graphql-subscriptions'
+        path: '/${WIKI.config.prefix}/graphql-subscriptions'
       }
     })
     this.servers.graph.applyMiddleware({ app: WIKI.app })

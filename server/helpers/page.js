@@ -40,6 +40,9 @@ module.exports = {
       p = _.trim(p)
       return !_.isEmpty(p) && p !== '..' && p !== '.'
     })
+    if (pathParts[0] == WIKI.config.prefix ) {
+      pathParts.shift()
+    }
     if (pathParts[0].length === 1) {
       pathParts.shift()
     }
